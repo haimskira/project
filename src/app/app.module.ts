@@ -13,8 +13,9 @@ import { FormsModule } from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
-import { PaymentComponent } from './payment/payment.component';
+import { PaymentComponent } from '../../../payment/payment.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+
 
 
 
@@ -30,7 +31,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ProfileComponent,
     HomeComponent,
     PaymentComponent,
-    CheckoutComponent
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

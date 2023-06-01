@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CartService } from '../shared/cart.service';
 import { CartItem } from '../shared/models/cart-item';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cart',
@@ -10,8 +12,12 @@ import { CartItem } from '../shared/models/cart-item';
 export class CartComponent {
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
+  proceedToCheckout() {
+    this.router.navigate(['/checkout']);
+  }
+  
   decreaseQuantity(cartItem: CartItem) {
     if (cartItem.quantity > 1) {
       cartItem.quantity--;

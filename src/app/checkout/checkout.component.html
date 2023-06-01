@@ -1,1 +1,16 @@
-<p>checkout works!</p>
+<div *ngIf="isLoggedIn; else loginMessage">
+  <!-- Display the items in the cart -->
+  <h3>Cart Items:</h3>
+  <ul>
+    <li *ngFor="let cartItem of cartItems">
+      {{ cartItem.product.name }} - Quantity: {{ cartItem.quantity }}
+    </li>
+  </ul>
+
+  <!-- Checkout button -->
+  <button (click)="checkout()">Checkout</button>
+</div>
+
+<ng-template #loginMessage>
+  <p>Please log in to proceed with the checkout.</p>
+</ng-template>

@@ -47,6 +47,12 @@ export class CartService {
     }
   }
 
+  clearCart() {
+    this.cartItems = []; // Clear the cart items
+    this.saveCartToLocalStorage();
+    this.emitCartItemsChanged(); // Emit the event
+  }
+
   private loadCartFromLocalStorage() {
     const cartData = localStorage.getItem('cart');
     if (cartData) {
