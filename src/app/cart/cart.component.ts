@@ -3,7 +3,6 @@ import { CartService } from '../shared/cart.service';
 import { CartItem } from '../shared/models/cart-item';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -12,12 +11,25 @@ import { Router } from '@angular/router';
 export class CartComponent {
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(private cartService: CartService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.loadCartItems();
+    this.cartService.cartItemsChanged.subscribe(() => {
+      this.loadCartItems();
+    });
+  }
+  
+  loadCartItems(): void {
+    this.cartService.getCartItems().subscribe((items: CartItem[]) => {
+      this.cartItems = items;
+    });
+  }
 
   proceedToCheckout() {
     this.router.navigate(['/checkout']);
   }
-  
+
   decreaseQuantity(cartItem: CartItem) {
     if (cartItem.quantity > 1) {
       cartItem.quantity--;
@@ -29,27 +41,15 @@ export class CartComponent {
   }
 
   removeFromCart(cartItem: CartItem) {
-    const index = this.cartItems.indexOf(cartItem);
-    if (index > -1) {
-      this.cartItems.splice(index, 1);
-      // Update the local storage to reflect the updated cart items array
-      this.cartService.saveCartToLocalStorage();
-      this.cartService.emitCartItemsChanged(); // Emit the event
-    }
-  }
+    console.log(cartItem.id);
+    this.cartService.removeFromCart(cartItem.id);
+  }  
 
   getCartItemCount(): number {
     return this.cartItems.reduce((count, cartItem) => count + cartItem.quantity, 0);
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce(
-      (total, cartItem) => total + cartItem.product.price * cartItem.quantity,
-      0
-    );
-  }
-
-  ngOnInit() {
-    this.cartItems = this.cartService.getCartItems();
+    return this.cartItems.reduce((total, cartItem) => total + cartItem.product.price * cartItem.quantity, 0);
   }
 }

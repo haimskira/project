@@ -12,6 +12,8 @@ export class RegisterComponent {
   email: string;
   password: string;
   showSuccessMessage: boolean = false;
+  showErrorMessage: boolean = false; // Add a flag for displaying the error message
+  errorMessage: string = ''; // Add a variable to store the error message
   registrationSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(public modal: NgbActiveModal, private authService: AuthService) {
@@ -39,7 +41,16 @@ export class RegisterComponent {
       (error) => {
         // Handle registration error
         console.log(error);
+        let errorMessage = 'An error occurred during registration.'; // Default error message
+        
+        // Check if the error object returned by Django has an 'error' property
+        if (error.error && error.error.error) {
+          errorMessage = error.error.error; // Assign the error message from the 'error' property
+        }
+        
+        this.errorMessage = errorMessage; // Assign the error message to display to the user
       }
     );
   }
+  
 }

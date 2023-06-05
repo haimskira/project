@@ -23,8 +23,8 @@
         <img [src]="'http://127.0.0.1:8000' + cartItem.product.image" alt="Product" class="card-img-top small-img">
         <div class="card-body">
           <h5 class="card-title">{{ cartItem.product.name }}</h5>
-          <p class="card-text">Type: {{ cartItem.product.type }}</p>
-          <p class="card-text">Color: {{ cartItem.product.color }}</p>
+          <p class="card-text">Type: {{ cartItem.product.description }}</p>
+          <!-- <p class="card-text">Color: {{ cartItem.product.color }}</p> -->
           <p class="card-text text-primary">${{ cartItem.product.price }}</p>
           <div class="quantity-input">
             <input type="number" class="form-control quantity-input-field" [(ngModel)]="cartItem.quantity">

@@ -7,16 +7,15 @@ import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CartComponent } from './cart/cart.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPayPalModule } from 'ngx-paypal';
 import { ContactComponent } from './contact/contact.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
-import { PaymentComponent } from '../../../payment/payment.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-
-
+import { PaymentComponent } from './payment/payment.component';
 
 
 @NgModule({
@@ -37,11 +36,11 @@ import { CheckoutComponent } from './checkout/checkout.component';
     BrowserModule,
     FormsModule,
     NgbModule,
+    NgxPayPalModule,
     AppRoutingModule,
-    HttpClientModule
-,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [NgbActiveModal], // Provide NgbActiveModal here
   bootstrap: [AppComponent]
 })
 export class AppModule { }

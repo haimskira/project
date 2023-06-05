@@ -22,12 +22,12 @@ export class HomeComponent implements OnInit {
     this.apiService.getProducts().subscribe(
       (products: Product[]) => {
         this.products = products.map(product => ({
-          ...product, 
-          image_url: `http://127.0.0.1:8000${product.image}`,
-          quantity: 0 
+          ...product,
+          image_url: `http://localhost:8000${product.image}`,
+          quantity: 0
         }));
   
-        // Console log the image URLs
+        // // Console log the image URLs
         // this.products.forEach(product => {
         //   console.log('Image URL:', product.image_url);
         // });

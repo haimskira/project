@@ -54,6 +54,7 @@ export class LoginComponent {
           this.authService.loggedIn = true;
           this.authService.username = this.username;
           this.activeModal.close('success');
+          window.location.reload(); // Refresh the page to display the cart items
         } else {
           console.error('Access token not found in the response');
         }
@@ -61,7 +62,6 @@ export class LoginComponent {
       (error) => {
         console.log(error);
         this.errorMessage = 'Invalid username or password';
-
       }
     );
   }
